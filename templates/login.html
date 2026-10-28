@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Laboratorio 8 - Acceso</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(135deg, #1e3a5f, #0f1f33);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    .card {
+      background: #ffffff;
+      padding: 2.5rem 2.5rem 2rem;
+      border-radius: 14px;
+      box-shadow: 0 20px 45px rgba(0,0,0,.35);
+      width: 100%;
+      max-width: 360px;
+    }
+    .card h1 {
+      font-size: 1.3rem;
+      margin: 0 0 .25rem;
+      color: #1e293b;
+      text-align: center;
+    }
+    .card p.subtitle {
+      margin: 0 0 1.5rem;
+      text-align: center;
+      color: #64748b;
+      font-size: .85rem;
+    }
+    label {
+      display: block;
+      font-size: .8rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: .3rem;
+    }
+    input {
+      width: 100%;
+      padding: .65rem .8rem;
+      margin-bottom: 1.1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: .95rem;
+      box-sizing: border-box;
+    }
+    button {
+      width: 100%;
+      padding: .7rem;
+      background: #1e3a5f;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    button:hover { background: #142945; }
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+      padding: .6rem .8rem;
+      border-radius: 8px;
+      font-size: .85rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    .footer-note {
+      margin-top: 1.4rem;
+      text-align: center;
+      font-size: .7rem;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Panel de Acceso</h1>
+    <p class="subtitle">Laboratorio 8 · Auditoría de Sistemas</p>
+
+    {% if error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+
+    <form action="/login" method="get">
+      <label for="usuario">Usuario</label>
+      <input type="text" id="usuario" name="usuario" placeholder="Ingrese su usuario" autocomplete="off">
+
+      <label for="password">Contraseña</label>
+      <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" autocomplete="off">
+
+      <button type="submit">Ingresar</button>
+    </form>
+
+    <div class="footer-note">Aplicación de práctica · Uso académico</div>
+  </div>
+</body>
+</html>
