@@ -73,11 +73,15 @@ def login():
     cur = conn.cursor()
 
     # --- LINEA VULNERABLE A PROPOSITO (NO HACER ESTO EN PRODUCCION) ---
-    query = "SELECT * FROM usuarios WHERE usuario = '%s' AND password = '%s'" % (usuario, password)
+    # Concatenacion simple (no %-format) para que payloads con '%' no rompan
+    # la construccion del string antes de llegar siquiera a SQLite.
+    query = "SELECT * FROM usuarios WHERE usuario = '" + usuario + "' AND password = '" + password + "'"
     try:
         cur.execute(query)
         row = cur.fetchone()
-    except sqlite3.OperationalError:
+    except Exception:
+        # Cualquier error de sintaxis SQL se trata como login fallido,
+        # para no devolver 500 (eso confunde a sqlmap con falsos WAF/IPS).
         row = None
     conn.close()
 
